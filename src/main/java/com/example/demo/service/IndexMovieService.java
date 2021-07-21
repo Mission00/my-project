@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.MovieDao;
-import com.example.demo.pojo.indexmovie;
+import com.example.demo.pojo.Indexmovie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ public class IndexMovieService {
     @Autowired
     private MovieDao movieDao;
 
-    public List<indexmovie> selectIndexMovie()
+    public List<Indexmovie> selectIndexMovie()
     {
-        List<indexmovie> list = null;
+        List<Indexmovie> list = null;
         list=movieDao.selectIndexMovie();
         return list;
     }

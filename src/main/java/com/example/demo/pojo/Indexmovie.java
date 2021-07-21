@@ -1,7 +1,7 @@
 package com.example.demo.pojo;
 
 
-public class indexmovie {
+public class Indexmovie {
 
 
     private int indexid;

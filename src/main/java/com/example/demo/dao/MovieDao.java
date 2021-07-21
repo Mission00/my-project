@@ -2,10 +2,9 @@ package com.example.demo.dao;
 
 
 
-import com.example.demo.pojo.indexmovie;
-import com.example.demo.pojo.movie;
+import com.example.demo.pojo.Indexmovie;
+import com.example.demo.pojo.Movie;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,17 +20,17 @@ public interface MovieDao {
             @Result(column = "name1",property = "name1"),
             @Result(column = "name2",property = "name2"),
     })
-    List<indexmovie> selectIndexMovie();
+    List<Indexmovie> selectIndexMovie();
 
     @Select("SELECT * FROM movie WHERE movie_id=#{movieid}")
-    movie selectMovieById(int movieid);
+    Movie selectMovieById(int movieid);
 
     @Select("SELECT * FROM movie WHERE category=#{Category}")
-    List<movie> selectMovieByCategory(String Category);
+    List<Movie> selectMovieByCategory(String Category);
 
     @Select("SELECT * FROM movie")
-    List<movie> selectAllMovie();
+    List<Movie> selectAllMovie();
 
     @Select("SELECT * FROM movie WHERE name1 LIKE concat('%',#{searchMesg},'%') or name2 LIKE concat('%',#{searchMesg},'%')")
-    List<movie> searchMovieByName(String searchMesg);
+    List<Movie> searchMovieByName(String searchMesg);
 }

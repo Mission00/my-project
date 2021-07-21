@@ -3,7 +3,7 @@ package com.example.demo.result;
 
 import java.io.Serializable;
 
-public class LoginResult<T> implements Serializable {
+public class Result<T> implements Serializable {
     int code;
     private T data;
 
@@ -16,7 +16,7 @@ public class LoginResult<T> implements Serializable {
         this.data = data;
     }
 
-    public LoginResult(int code)
+    public Result(int code)
     {
         this.code = code;
     }

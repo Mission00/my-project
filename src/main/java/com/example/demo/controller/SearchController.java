@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.pojo.movie;
+import com.example.demo.pojo.Movie;
 import com.example.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ public class SearchController {
     MovieService movieService;
     @GetMapping(value = "/api/search")
     @ResponseBody
-    public List<movie> getDetails(@RequestParam("searchMesg")String searchMesg)
+    public List<Movie> getDetails(@RequestParam("searchMesg")String searchMesg)
     {
         return movieService.searchMovieByName(searchMesg);
     }

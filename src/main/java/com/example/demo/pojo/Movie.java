@@ -1,6 +1,6 @@
 package com.example.demo.pojo;
 
-public class movie {
+public class Movie {
 
 
     private int movie_id;

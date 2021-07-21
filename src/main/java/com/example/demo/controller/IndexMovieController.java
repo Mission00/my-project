@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.pojo.indexmovie;
+import com.example.demo.pojo.Indexmovie;
 import com.example.demo.service.IndexMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +16,10 @@ public class IndexMovieController
     @CrossOrigin
     @GetMapping(value = "/api/index")
     @ResponseBody
-    public List<indexmovie> getIndexMovies()
+    public List<Indexmovie> getIndexMovies()
     {
 
-        List<indexmovie> list = null;
+        List<Indexmovie> list = null;
         list= indexMovieService.selectIndexMovie();
         return list;
     }

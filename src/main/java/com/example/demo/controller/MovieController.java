@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.pojo.movie;
+import com.example.demo.pojo.Movie;
 import com.example.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +18,9 @@ public class MovieController {
     MovieService movieService;
     @GetMapping(value = "/api/movies")
     @ResponseBody
-    public List<movie> listMovies(@RequestParam("Category")String Category)
+    public List<Movie> listMovies(@RequestParam("Category")String Category)
     {
-        List<movie> list = null;
+        List<Movie> list = null;
         if(!Category.equals("全部"))
         {
             list = movieService.selectMovieByCategory(Category);

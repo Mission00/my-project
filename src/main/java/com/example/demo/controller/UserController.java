@@ -10,18 +10,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
-public class LoginController {
+public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
     private AdminService adminService;
-    @CrossOrigin
-    @PostMapping(value = "/api/login")
+
+    @GetMapping(value = "/api/userlist")
     @ResponseBody
-    public Result login(@RequestBody User requestUser)
+    public Result<List<User>> listUser(@RequestBody User requestUser)
     {
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
@@ -46,24 +48,17 @@ public class LoginController {
         return result;
     }
 
-    @CrossOrigin
-    @PostMapping(value = "api/adminlogin")
+    @GetMapping(value = "/api/adminlist")
     @ResponseBody
-    public Result adminLoginResult(@RequestBody Admin requestAdmin){
-        String adminname = requestAdmin.getAdminname();
-        String password = requestAdmin.getPassword();
-        System.out.println(adminname+password);
-        Admin admin = adminService.selectAdminByAdminNameAndPassword(adminname,password);
-        System.out.println(admin);
+    public Result<List<Admin>> listAdmin(@RequestParam("pageSize") int pageSize,@RequestParam("currentPage") int currentPage)
+    {
+        List<Admin> adminList = adminService.selectAdmin(pageSize,currentPage);
         Result result;
-        if(admin==null){
-            return new Result(400);
+        if(adminList == null){
+            return new Result<>(400);
         }else{
-            Map<String,Object> map = new HashMap<>();
             result = new Result(200);
-            map.put("adminid",admin.getId());
-            map.put("adminname",admin.getAdminname());
-            result.setData(map);
+            result.setData(adminList);
         }
         return result;
     }

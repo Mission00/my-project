@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.MovieDao;
-import com.example.demo.pojo.movie;
+import com.example.demo.pojo.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +12,24 @@ public class MovieService {
     @Autowired
     private MovieDao movieDao;
 
-    public List<movie> selectMovieByCategory (String Category)
+    public List<Movie> selectMovieByCategory (String Category)
     {
-        List<movie> list=null;
+        List<Movie> list=null;
         list = movieDao.selectMovieByCategory(Category);
         return list;
     }
 
-    public List<movie> selectAllMovie ()
+    public List<Movie> selectAllMovie ()
     {
         return movieDao.selectAllMovie();
     }
 
-    public movie selectMovieByID (int movieid)
+    public Movie selectMovieByID (int movieid)
     {
         return movieDao.selectMovieById(movieid);
     }
 
-    public List<movie> searchMovieByName (String searchMesg)
+    public List<Movie> searchMovieByName (String searchMesg)
     {
         return movieDao.searchMovieByName(searchMesg);
     }
