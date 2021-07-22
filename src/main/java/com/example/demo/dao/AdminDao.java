@@ -18,6 +18,7 @@ public interface AdminDao {
             @Result(id = true,column = "id",property = "id"),
             @Result(column = "name",property = "adminname"),
             @Result(column = "password",property = "password"),
+            @Result(column = "remarks",property = "remarks"),
     })
     Admin selectAdminByNameAndPassword(String adminname, String password);
 
@@ -26,6 +27,13 @@ public interface AdminDao {
             @Result(id = true,column = "id",property = "id"),
             @Result(column = "name",property = "adminname"),
             @Result(column = "password",property = "password"),
+            @Result(column = "remarks",property = "remarks"),
     })
     List<Admin> selectAdmin(int pageSize,int star);
+
+    @Select("select count(1) from admin")
+    int getAdminTotol();
+
+    @Select("delete from admin where id = #{id}")
+    void deleteAdmin(int id);
 }

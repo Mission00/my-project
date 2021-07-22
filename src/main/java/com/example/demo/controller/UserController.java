@@ -59,7 +59,23 @@ public class UserController {
         }else{
             result = new Result(200);
             result.setData(adminList);
+            result.setTotal(adminService.getAdminTotol());
         }
         return result;
+    }
+//    @GetMapping(value = "/api/admintotol")
+//    @ResponseBody
+//    public int getAdminTotol(){
+//        Result result;
+//        int totol = adminService.getAdminTotol();
+//        return totol;
+//    }
+
+    @GetMapping(value = "/api/deleteAdmin")
+    @ResponseBody
+    public Result deleteAdminById(@RequestParam("id") int id)
+    {
+        adminService.deleteAdmin(id);
+        return null;
     }
 }

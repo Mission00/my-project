@@ -4,6 +4,15 @@ public class Admin {
     private int id;
     private String adminname;
     private String password;
+    private String remarks;
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public int getId() {
         return id;

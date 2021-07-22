@@ -24,4 +24,13 @@ public class AdminService {
         adminList = adminDao.selectAdmin(pageSize,(currentPage-1)*pageSize);
         return adminList;
     }
+
+    public int getAdminTotol()
+    {
+        return adminDao.getAdminTotol();
+    }
+
+    public void deleteAdmin(int id){
+        adminDao.deleteAdmin(id);
+    }
 }
