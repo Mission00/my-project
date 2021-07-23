@@ -20,10 +20,11 @@ public class Admin {
 
     @Override
     public String toString() {
-        return "admin{" +
+        return "Admin{" +
                 "id=" + id +
                 ", adminname='" + adminname + '\'' +
                 ", password='" + password + '\'' +
+                ", remarks='" + remarks + '\'' +
                 '}';
     }
 

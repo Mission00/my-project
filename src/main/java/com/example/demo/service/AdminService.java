@@ -33,4 +33,12 @@ public class AdminService {
     public void deleteAdmin(int id){
         adminDao.deleteAdmin(id);
     }
+
+    public Boolean adminIsInTable(String adminName){
+        return adminDao.selectAdminByName(adminName) != null;
+    }
+
+    public void insertAdmin(Admin admin){
+        adminDao.insertAdmin(admin);
+    }
 }

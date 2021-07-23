@@ -78,4 +78,16 @@ public class UserController {
         adminService.deleteAdmin(id);
         return null;
     }
+
+    @PostMapping(value = "/api/insertAdmin")
+    @ResponseBody
+    public Result insertAdmin(@RequestBody Admin admin)
+    {
+        if(adminService.adminIsInTable(admin.getAdminname())){
+            return new Result(202);
+        }else {
+            adminService.insertAdmin(admin);
+        }
+        return new Result(200);
+    }
 }

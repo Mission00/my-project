@@ -1,10 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.pojo.Admin;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +19,16 @@ public interface AdminDao {
     })
     Admin selectAdminByNameAndPassword(String adminname, String password);
 
+
+    @Select("SELECT * FROM admin WHERE name=#{adminName}")
+    @Results({
+            @Result(id = true,column = "id",property = "id"),
+            @Result(column = "name",property = "adminname"),
+            @Result(column = "password",property = "password"),
+            @Result(column = "remarks",property = "remarks"),
+    })
+    Admin selectAdminByName(String adminName);
+
     @Select("select * from admin limit #{star},#{pageSize}")
     @Results({
             @Result(id = true,column = "id",property = "id"),
@@ -36,4 +43,7 @@ public interface AdminDao {
 
     @Select("delete from admin where id = #{id}")
     void deleteAdmin(int id);
+
+    @Insert("insert into admin (name,password,remarks) values (#{adminname},#{password},#{remarks})")
+    void insertAdmin(Admin admin);
 }
