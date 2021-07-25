@@ -29,21 +29,34 @@ public interface AdminDao {
     })
     Admin selectAdminByName(String adminName);
 
-    @Select("select * from admin limit #{star},#{pageSize}")
+    @Select("<script>"
+            +"select * from admin"
+            +"<if test='searchMsg!=null'>"
+            +"where name LIKE concat('%',#{searchMsg},'%')"
+            +"</if>"
+            +"limit #{star},#{pageSize}"
+            +"</script>")
     @Results({
             @Result(id = true,column = "id",property = "id"),
             @Result(column = "name",property = "adminname"),
             @Result(column = "password",property = "password"),
             @Result(column = "remarks",property = "remarks"),
     })
-    List<Admin> selectAdmin(int pageSize,int star);
+    List<Admin> selectAdmin(int pageSize,int star,@Param("searchMsg")String searchMsg);
 
-    @Select("select count(1) from admin")
-    int getAdminTotol();
 
     @Select("delete from admin where id = #{id}")
     void deleteAdmin(int id);
 
     @Insert("insert into admin (name,password,remarks) values (#{adminname},#{password},#{remarks})")
     void insertAdmin(Admin admin);
+
+    @Select("<script>"
+            +"select count(1) from admin"
+            +"<if test='searchMsg!=null'>"
+            +"where name LIKE concat('%',#{searchMsg},'%')"
+            +"</if>"
+            +"</script>")
+    int getTotal(@Param("searchMsg")String searchMsg);
+
 }

@@ -5,6 +5,8 @@ import com.example.demo.pojo.Admin;
 import com.example.demo.result.Result;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.UserService;
+import org.apache.ibatis.annotations.Param;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
@@ -16,6 +18,7 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 public class UserController {
+    
     @Autowired
     private UserService userService;
     @Autowired
@@ -33,6 +36,7 @@ public class UserController {
         if(user == null)
         {
             return new Result(400);
+
         }
         else
         {
@@ -50,16 +54,19 @@ public class UserController {
 
     @GetMapping(value = "/api/adminlist")
     @ResponseBody
-    public Result<List<Admin>> listAdmin(@RequestParam("pageSize") int pageSize,@RequestParam("currentPage") int currentPage)
+    public Result<List<Admin>> listAdmin(@RequestParam("pageSize") int pageSize
+            ,@RequestParam("currentPage") int currentPage
+            ,@RequestParam("searchMsg") String searchMsg)
     {
-        List<Admin> adminList = adminService.selectAdmin(pageSize,currentPage);
+        List<Admin> adminList = adminService.selectAdmin(pageSize,currentPage,searchMsg);
         Result result;
         if(adminList == null){
             return new Result<>(400);
         }else{
             result = new Result(200);
             result.setData(adminList);
-            result.setTotal(adminService.getAdminTotol());
+            result.setTotal(adminService.getTotal(searchMsg));
+
         }
         return result;
     }
@@ -90,4 +97,5 @@ public class UserController {
         }
         return new Result(200);
     }
+
 }
