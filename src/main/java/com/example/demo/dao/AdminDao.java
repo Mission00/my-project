@@ -59,4 +59,7 @@ public interface AdminDao {
             +"</script>")
     int getTotal(@Param("searchMsg")String searchMsg);
 
+    @Update("update admin set name = #{adminname},password=#{password},remarks=#{remarks} where id=#{id}")
+    void updateAdmin(Admin admin);
+
 }

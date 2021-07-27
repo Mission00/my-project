@@ -43,4 +43,8 @@ public class AdminService {
         return adminDao.getTotal(searchMsg);
     }
 
+    public void updateAdmin(Admin admin){
+        adminDao.updateAdmin(admin);
+    }
+
 }

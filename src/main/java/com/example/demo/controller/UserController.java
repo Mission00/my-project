@@ -18,7 +18,7 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -70,13 +70,6 @@ public class UserController {
         }
         return result;
     }
-//    @GetMapping(value = "/api/admintotol")
-//    @ResponseBody
-//    public int getAdminTotol(){
-//        Result result;
-//        int totol = adminService.getAdminTotol();
-//        return totol;
-//    }
 
     @GetMapping(value = "/api/deleteAdmin")
     @ResponseBody
@@ -98,4 +91,10 @@ public class UserController {
         return new Result(200);
     }
 
+    @PostMapping(value = "/api/updateAdmin")
+    @ResponseBody
+    public void updataAdmin(@RequestBody Admin admin){
+        System.out.println(admin);
+        adminService.updateAdmin(admin);
+    }
 }
