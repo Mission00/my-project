@@ -2,9 +2,13 @@ package com.example.demo.service;
 
 
 import com.example.demo.dao.UserDao;
+import com.example.demo.pojo.Admin;
 import com.example.demo.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -18,14 +22,37 @@ public class UserService {
         return user;
     }
 
-    public boolean insertUser(String username, String password)
+    public boolean insertUser(User user)
     {
-        if(userDAO.selectUserByName(username)==null)
+        if(userDAO.selectUserByName(user.getUsername())==null)
         {
-            userDAO.insertUser(username,password);
+            userDAO.insertUser(user);
             return true;
         }
         return false;
+    }
+
+    public List<User> selectUser(int pageSize, int currentPage, String searchMsg)
+    {
+        List<User> userList = null;
+        userList = userDAO.selectUser(pageSize,(currentPage-1)*pageSize,searchMsg);
+        return userList;
+    }
+
+    public int getTotal(String searchMsg){
+        return userDAO.getTotal(searchMsg);
+    }
+
+    public void deleteUser(int id){
+        userDAO.deleteUser(id);
+    }
+
+    public Boolean userIsInTable(String userName){
+        return userDAO.selectUserByName(userName) != null;
+    }
+
+    public void updateUser(User user){
+        userDAO.updateUser(user);
     }
 
 

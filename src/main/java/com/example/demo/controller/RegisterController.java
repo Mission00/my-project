@@ -20,7 +20,7 @@ public class RegisterController {
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
         String password = requestUser.getPassword();
-        boolean result = userService.insertUser(username,password);
+        boolean result = userService.insertUser(requestUser);
 
         if(result)
         {

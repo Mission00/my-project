@@ -26,28 +26,18 @@ public class UserController {
 
     @GetMapping(value = "/api/userlist")
     @ResponseBody
-    public Result<List<User>> listUser(@RequestBody User requestUser)
+    public Result listUser(@RequestParam("pageSize") int pageSize
+            ,@RequestParam("currentPage") int currentPage
+            ,@RequestParam("searchMsg") String searchMsg)
     {
-        String username = requestUser.getUsername();
-        username = HtmlUtils.htmlEscape(username);
-        String password = requestUser.getPassword();
-        User user = userService.selectUserByUserNameAndPassword(username,password);
+        List<User> userList = userService.selectUser(pageSize,currentPage,searchMsg);
         Result result;
-        if(user == null)
-        {
-            return new Result(400);
-
-        }
-        else
-        {
-            Map<String,Object> map = new HashMap<String,Object>();
-            result =new Result(200);
-            //result.setCode(200);
-            map.put("userid",user.getId());
-            map.put("username",user.getUsername());
-            System.out.println(map.get("userid"));
-            result.setData(map);
-            //return new Result(200);
+        if(userList == null){
+            return new Result<>(400);
+        }else{
+            result = new Result(200);
+            result.setData(userList);
+            result.setTotal(userService.getTotal(searchMsg));
         }
         return result;
     }
@@ -79,6 +69,14 @@ public class UserController {
         return null;
     }
 
+    @GetMapping(value = "/api/deleteUser")
+    @ResponseBody
+    public Result deleteUserById(@RequestParam("id") int id)
+    {
+        userService.deleteUser(id);
+        return null;
+    }
+
     @PostMapping(value = "/api/insertAdmin")
     @ResponseBody
     public Result insertAdmin(@RequestBody Admin admin)
@@ -91,10 +89,29 @@ public class UserController {
         return new Result(200);
     }
 
+    @PostMapping(value = "/api/insertUser")
+    @ResponseBody
+    public Result insertUser(@RequestBody User user)
+    {
+        if(userService.userIsInTable(user.getUsername())){
+            return new Result(202);
+        }else {
+            userService.insertUser(user);
+        }
+        return new Result(200);
+    }
+
     @PostMapping(value = "/api/updateAdmin")
     @ResponseBody
     public void updataAdmin(@RequestBody Admin admin){
         System.out.println(admin);
         adminService.updateAdmin(admin);
+    }
+
+    @PostMapping(value = "/api/updateUser")
+    @ResponseBody
+    public void updataAdmin(@RequestBody User user){
+        System.out.println(user);
+        userService.updateUser(user);
     }
 }
