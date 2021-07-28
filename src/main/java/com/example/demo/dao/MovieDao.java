@@ -5,6 +5,7 @@ package com.example.demo.dao;
 import com.example.demo.pojo.Indexmovie;
 import com.example.demo.pojo.Movie;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,6 +27,12 @@ public interface MovieDao {
     Movie selectMovieById(int movieid);
 
     @Select("SELECT * FROM movie WHERE category=#{Category}")
+    @Results({
+            @Result(id = true,column = "movie_id",property = "movie_id"),
+            @Result(column = "name1",property = "name1"),
+            @Result(column = "name2",property = "name2"),
+            @Result(column = "movie_id",property = "tagList",many = @Many(select = "com.example.demo.dao.TagDao.getTagByMovieId",fetchType = FetchType.LAZY))
+    })
     List<Movie> selectMovieByCategory(String Category);
 
     @Select("SELECT * FROM movie")

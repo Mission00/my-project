@@ -1,5 +1,10 @@
 package com.example.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+@JsonIgnoreProperties(value = {"handler"})
 public class Movie {
 
 
@@ -9,6 +14,7 @@ public class Movie {
     private String director;
     private String screenwriter;
     private String actot;
+    private List<Tag> tagList;
     private String type;
     private String country;
     private String language;
@@ -17,6 +23,14 @@ public class Movie {
     private String movie_length;
     private String introduction;
     private String category;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getMovie_id() {
         return movie_id;
@@ -66,12 +80,12 @@ public class Movie {
         this.actot = actot;
     }
 
-    public String getType() {
-        return type;
+    public List<Tag> getTagList() {
+        return tagList;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTagList(List<Tag> tagList) {
+        this.tagList = tagList;
     }
 
     public String getCountry() {
@@ -130,6 +144,12 @@ public class Movie {
         this.category = category;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movie_id=" + movie_id +
+                ", name1='" + name1 + '\'' +
+                ", tagList=" + tagList +
+                '}';
+    }
 }
