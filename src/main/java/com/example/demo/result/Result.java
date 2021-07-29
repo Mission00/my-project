@@ -40,6 +40,8 @@ public class Result<T> implements Serializable {
     public void setCode(int code) {
         this.code = code;
     }
+
+
 }
 
 

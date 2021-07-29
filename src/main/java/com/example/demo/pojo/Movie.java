@@ -6,8 +6,6 @@ import java.util.List;
 
 @JsonIgnoreProperties(value = {"handler"})
 public class Movie {
-
-
     private int movie_id;
     private String name1;
     private String name2;
@@ -23,6 +21,15 @@ public class Movie {
     private String movie_length;
     private String introduction;
     private String category;
+    private String img_src;
+
+    public String getImg_src() {
+        return img_src;
+    }
+
+    public void setImg_src(String img_src) {
+        this.img_src = img_src;
+    }
 
     public String getType() {
         return type;

@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.pojo.Movie;
+import com.example.demo.pojo.User;
+import com.example.demo.result.Result;
 import com.example.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -29,7 +28,30 @@ public class MovieController {
         {
             list = movieService.selectAllMovie();
         }
+
+
         System.out.println(list.get(0));
         return list;
     }
+
+    @GetMapping(value = "/api/movielist")
+    @ResponseBody
+    public Result getMovieList(@RequestParam("pageSize") int pageSize
+            ,@RequestParam("currentPage") int currentPage
+            ,@RequestParam("searchMsg") String searchMsg)
+    {
+        List<Movie> movieList = movieService.selectMovie(pageSize,currentPage,searchMsg);
+        Result result;
+        if(movieList == null){
+            result = new Result(400);
+        }else{
+            result = new Result(200);
+            result.setData(movieList);
+            result.setTotal(movieService.getTotal(searchMsg));
+        }
+        System.out.println(movieList);
+        return result;
+    }
+
+
 }
