@@ -6,6 +6,7 @@ import com.example.demo.pojo.Indexmovie;
 import com.example.demo.pojo.Movie;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -69,6 +70,10 @@ public interface MovieDao {
             +"</script>")
     @Results({
             @Result(id = true,column = "movie_id",property = "movie_id"),
+            @Result(column = "language" ,property = "language",
+                    one = @One(select = "com.example.demo.dao.LanguageDao.getLanguageById",fetchType = FetchType.LAZY)),
+            @Result(column = "category" ,property = "category",
+                    one = @One(select = "com.example.demo.dao.CategoryDao.getCategoryById",fetchType = FetchType.LAZY)),
             @Result(column = "movie_id",property = "tagList",
                     many = @Many(select = "com.example.demo.dao.TagDao.getTagByMovieId",fetchType = FetchType.LAZY))
     })

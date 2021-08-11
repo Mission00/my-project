@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 @CrossOrigin
 @Controller
@@ -51,6 +53,15 @@ public class MovieController {
         }
         System.out.println(movieList);
         return result;
+    }
+
+    @PostMapping(value = "/api/insertmovie")
+    @ResponseBody
+    public Result insertMovie(@RequestBody Movie movie)
+    {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String date = df.format(System.currentTimeMillis());// new Date()为获取当前系统时间，也可使用当前时间戳
+        return null;
     }
 
 

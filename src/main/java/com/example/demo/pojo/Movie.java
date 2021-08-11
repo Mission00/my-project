@@ -1,7 +1,9 @@
 package com.example.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Date;
 import java.util.List;
 
 @JsonIgnoreProperties(value = {"handler"})
@@ -15,13 +17,35 @@ public class Movie {
     private List<Tag> tagList;
     private String type;
     private String country;
-    private String language;
-    private String premiere;
+    private Language language;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date premiere;
     private int num;
-    private String movie_length;
+    private int movie_length;
     private String introduction;
-    private String category;
+    private Category category;
     private String img_src;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date posttime;
+
+
+    public Date getPremiere() {
+        return premiere;
+    }
+
+    public void setPremiere(Date premiere) {
+        this.premiere = premiere;
+    }
+
+    public Date getPosttime() {
+        return posttime;
+    }
+
+    public void setPosttime(Date posttime) {
+        this.posttime = posttime;
+    }
 
     public String getImg_src() {
         return img_src;
@@ -103,20 +127,20 @@ public class Movie {
         this.country = country;
     }
 
-    public String getLanguage() {
+    public Language getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(Language language) {
         this.language = language;
     }
 
-    public String getPremiere() {
-        return premiere;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setPremiere(String premiere) {
-        this.premiere = premiere;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public int getNum() {
@@ -127,11 +151,11 @@ public class Movie {
         this.num = num;
     }
 
-    public String getMovie_length() {
+    public int getMovie_length() {
         return movie_length;
     }
 
-    public void setMovie_length(String movie_length) {
+    public void setMovie_length(int movie_length) {
         this.movie_length = movie_length;
     }
 
@@ -143,13 +167,6 @@ public class Movie {
         this.introduction = introduction;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     @Override
     public String toString() {
