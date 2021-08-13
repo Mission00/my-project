@@ -16,6 +16,8 @@ spring:
                 # driver-class-name: com.mysql.jdbc.Driver
                 hikari:
                         connection-timeout: 60000
+        resources:
+                static-locations: file:G:/disign/data/  #访问系统外部资源，将该目录下的文件映射到系统下
 
 server:
         port: 8443

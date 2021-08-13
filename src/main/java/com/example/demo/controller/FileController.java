@@ -8,17 +8,19 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.UUID;
 
 @Controller
 public class FileController {
     @CrossOrigin
-    @PostMapping("api/upload")
+    @PostMapping("api/file/upload")
     @ResponseBody
     public String uploadImg(@RequestParam("file")MultipartFile multipartFile,HttpServletRequest request){
         System.out.println(multipartFile.getOriginalFilename());
-        String filePath = "G:/disign/data/" + multipartFile.getOriginalFilename();
+        String originalFileName = multipartFile.getOriginalFilename();
+        String fileName = UUID.randomUUID().toString().replaceAll("-", "")
+                +originalFileName.substring(originalFileName.lastIndexOf("."));//uuid随机生成文件名
+        String filePath = "G:/disign/data/" + fileName;
         File file = new File(filePath);
         if (!file.exists()) {
             try {
@@ -33,7 +35,23 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(request.getContextPath());
-        return file.getAbsolutePath().replaceAll("\\\\", "/");
+        System.out.println(fileName);
+        //return file.getAbsolutePath().replaceAll("\\\\", "/");
+        return fileName;
     }
+    @CrossOrigin
+    @GetMapping("api/file/remove")
+    @ResponseBody
+    public Boolean removeFile(String fileName){
+        File file = new File("G:/disign/data/"+fileName);
+        if (file.exists()) {
+            file.delete();
+            System.out.println("===========删除成功=================");
+            return true;
+        } else {
+            System.out.println("===============删除失败==============");
+            return false;
+        }
+    }
+
 }

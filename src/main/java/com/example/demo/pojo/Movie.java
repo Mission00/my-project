@@ -173,7 +173,21 @@ public class Movie {
         return "Movie{" +
                 "movie_id=" + movie_id +
                 ", name1='" + name1 + '\'' +
+                ", name2='" + name2 + '\'' +
+                ", director='" + director + '\'' +
+                ", screenwriter='" + screenwriter + '\'' +
+                ", actot='" + actot + '\'' +
                 ", tagList=" + tagList +
+                ", type='" + type + '\'' +
+                ", country='" + country + '\'' +
+                ", language=" + language +
+                ", premiere=" + premiere +
+                ", num=" + num +
+                ", movie_length=" + movie_length +
+                ", introduction='" + introduction + '\'' +
+                ", category=" + category +
+                ", img_src='" + img_src + '\'' +
+                ", posttime=" + posttime +
                 '}';
     }
 }
