@@ -6,7 +6,7 @@
 <configuration>
     <!-- 指定 MyBatis 所用日志的具体实现 -->
     <settings>
-        <setting name="logImpl" value="LOG4J"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <environments default="mysql">
         <!-- 环境配置，即连接的数据库。 -->

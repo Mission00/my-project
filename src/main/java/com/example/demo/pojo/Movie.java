@@ -3,11 +3,12 @@ package com.example.demo.pojo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @JsonIgnoreProperties(value = {"handler"})
-public class Movie {
+public class Movie implements Serializable {
     private int movie_id;
     private String name1;
     private String name2;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -40,9 +41,16 @@ public class MovieController {
     @ResponseBody
     public Result getMovieList(@RequestParam("pageSize") int pageSize
             ,@RequestParam("currentPage") int currentPage
-            ,@RequestParam("searchMsg") String searchMsg)
+            ,@RequestParam("searchMsg") String searchMsg
+            ,@RequestParam("searchType") String searchType
+            ,@RequestParam("language") int language_id
+            ,@RequestParam("category") int category_id)
     {
-        List<Movie> movieList = movieService.selectMovie(pageSize,currentPage,searchMsg);
+        System.out.println(searchType);
+        searchType = searchMsg.equals("name")?null:searchType;
+        System.out.println(searchType);
+        List<Movie> movieList = movieService.selectMovie(pageSize,currentPage,searchMsg,
+                searchType,language_id,category_id);
         Result result;
         if(movieList == null){
             result = new Result(400);
@@ -61,11 +69,55 @@ public class MovieController {
     {
 
         System.out.println(movie);
-
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String date = df.format(System.currentTimeMillis());// new Date()为获取当前系统时间，也可使用当前时间戳
-        return null;
+        movie.setPosttime(new Date());
+        System.out.println(movie.getPosttime());
+        try {
+            movieService.insertMovie(movie);
+        }catch (Exception e){
+            Result result = new Result(202);
+            result.setData(e.getMessage());
+            return result;
+        }
+        System.out.println(1);
+        return new Result(200);
     }
+
+    @PostMapping(value = "/api/updatemovie")
+    @ResponseBody
+    public Result updateMovie(@RequestBody Movie movie)
+    {
+
+        System.out.println(movie);
+        movie.setPosttime(new Date());
+        System.out.println(movie.getPosttime());
+        try {
+            movieService.updateMovie(movie);
+        }catch (Exception e){
+            Result result = new Result(202);
+            result.setData(e.getMessage());
+            return result;
+        }
+        System.out.println(1);
+        return new Result(200);
+    }
+
+    @GetMapping(value = "/api/deleteMovie")
+    @ResponseBody
+    public Result deleteMovie(@RequestParam("movie_id") int movie_id)
+    {
+
+        System.out.println(movie_id);
+        try {
+            movieService.deleteMovie(movie_id);
+        }catch (Exception e){
+            Result result = new Result(202);
+            result.setData(e.getMessage());
+            return result;
+        }
+        return new Result(200);
+    }
+
+
 
 
 

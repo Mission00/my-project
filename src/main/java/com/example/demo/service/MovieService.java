@@ -39,13 +39,27 @@ public class MovieService {
         return movieDao.getTotal(searchMsg);
     }
 
-    public List<Movie> selectMovie(int pageSize, int currentPage, String searchMsg)
-    {
+    public List<Movie> selectMovie(int pageSize, int currentPage,
+                                   String searchMsg,
+                                   String searchType,
+                                   int language_id,
+                                   int category_id) {
         List<Movie> movieList = null;
 
         System.out.println("test:"+pageSize+currentPage+searchMsg);
-        movieList = movieDao.selectMovie(pageSize,(currentPage-1)*pageSize,searchMsg);
+        movieList = movieDao.selectMovie(pageSize,(currentPage-1)*pageSize,searchMsg,searchType,language_id,category_id);
         return movieList;
     }
 
+    public void insertMovie(Movie movie){
+        movieDao.insertMovie(movie);
+    }
+
+    public void updateMovie(Movie movie){
+        movieDao.updateMovie(movie);
+    }
+
+    public void deleteMovie(int movie_id){
+        movieDao.deleteMovie(movie_id);
+    }
 }

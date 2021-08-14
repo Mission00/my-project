@@ -63,9 +63,16 @@ public interface MovieDao {
 
     @Select("<script>"
             +"SELECT * FROM movie "
+            +"where 1=1"
             +"<if test='searchMsg!=null'>"
-            +"where name2 LIKE concat('%',#{searchMsg},'%')"
-            +"</if>"
+            +"and ${searchType} LIKE concat('%',#{searchMsg},'%')"
+            +"</if>" +
+            "<if test='language_id!=-1'>" +
+            "and language=#{language_id}" +
+            "</if>"+
+            "<if test='category_id!=-1'>" +
+            "and category=#{category_id}" +
+            "</if>"
             +"limit #{star},#{pageSize}"
             +"</script>")
     @Results({
@@ -77,7 +84,10 @@ public interface MovieDao {
             @Result(column = "movie_id",property = "tagList",
                     many = @Many(select = "com.example.demo.dao.TagDao.getTagByMovieId",fetchType = FetchType.LAZY))
     })
-    List<Movie> selectMovie(int pageSize,int star,@Param("searchMsg")String searchMsg);
+    List<Movie> selectMovie(int pageSize,int star,@Param("searchMsg")String searchMsg,
+                            @Param("searchType")String searchType,
+                            @Param("language_id")int language_id,
+                            @Param("category_id")int category_id);
 
 
     @Select("<script>"
@@ -87,4 +97,19 @@ public interface MovieDao {
             +"</if>"
             +"</script>")
     int getTotal(@Param("searchMsg")String searchMsg);
+
+    @Insert("insert into movie (name1,name2,director,screenwriter,actot,type,country,language,premiere,num,movie_length,introduction,category,posttime,img_src) " +
+            "values (#{name1},#{name2},#{director},#{screenwriter},#{actot},#{type},#{country},#{language.id}" +
+            ",#{premiere},#{num},#{movie_length},#{introduction},#{category.id},#{posttime},#{img_src})")
+    void insertMovie(Movie movie);
+
+    @Update("UPDATE movie set name1=#{name1},director=#{director},screenwriter=#{screenwriter}," +
+            "actot=#{actot},type=#{type},country=#{country},language=#{language.id}," +
+            "premiere=#{premiere},num=#{num},movie_length=#{movie_length},introduction=#{introduction}," +
+            "category=#{category.id},posttime=#{posttime},img_src=#{img_src} " +
+            "where movie_id = #{movie_id}")
+    void updateMovie(Movie movie);
+
+    @Delete("delete from movie where movie_id = #{movie_id}")
+    void deleteMovie(int movie_id);
 }
