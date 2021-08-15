@@ -5,6 +5,16 @@ public class Admin {
     private String adminname;
     private String password;
     private String remarks;
+    private Boolean isUsed;
+
+    public Boolean getisUsed() {
+        return isUsed;
+    }
+
+    public Admin setisUsed(Boolean isUsed) {
+        this.isUsed = isUsed;
+        return this;
+    }
 
     public String getRemarks() {
         return remarks;
@@ -18,15 +28,6 @@ public class Admin {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "id=" + id +
-                ", adminname='" + adminname + '\'' +
-                ", password='" + password + '\'' +
-                ", remarks='" + remarks + '\'' +
-                '}';
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -47,4 +48,6 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

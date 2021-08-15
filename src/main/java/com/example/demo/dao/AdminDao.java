@@ -48,7 +48,7 @@ public interface AdminDao {
     @Select("delete from admin where id = #{id}")
     void deleteAdmin(int id);
 
-    @Insert("insert into admin (name,password,remarks) values (#{adminname},#{password},#{remarks})")
+    @Insert("insert into admin (name,password,remarks,isUsed) values (#{adminname},#{password},#{remarks},#{isUsed})")
     void insertAdmin(Admin admin);
 
     @Select("<script>"
@@ -61,5 +61,8 @@ public interface AdminDao {
 
     @Update("update admin set name = #{adminname},password=#{password},remarks=#{remarks} where id=#{id}")
     void updateAdmin(Admin admin);
+
+    @Update("update admin set isUsed=${isUsed} where id=#{id}")
+    void banAdmin(int id,boolean isUsed);
 
 }

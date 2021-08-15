@@ -47,4 +47,6 @@ public class AdminService {
         adminDao.updateAdmin(admin);
     }
 
+    public void banAdmin(int id,boolean isUsed){adminDao.banAdmin(id,isUsed);}
+
 }

@@ -58,7 +58,9 @@ public class LoginController {
         Result result;
         if(admin==null){
             return new Result(400);
-        }else{
+        }else if(!admin.getisUsed()){
+            return new Result(-1);
+        } else{
             Map<String,Object> map = new HashMap<>();
             result = new Result(200);
             map.put("adminid",admin.getId());

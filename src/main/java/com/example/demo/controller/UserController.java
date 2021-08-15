@@ -56,7 +56,6 @@ public class UserController {
             result = new Result(200);
             result.setData(adminList);
             result.setTotal(adminService.getTotal(searchMsg));
-
         }
         return result;
     }
@@ -113,5 +112,12 @@ public class UserController {
     public void updataAdmin(@RequestBody User user){
         System.out.println(user);
         userService.updateUser(user);
+    }
+
+    @GetMapping(value = "/api/banAdmin")
+    @ResponseBody
+    public void banAdmin(@RequestParam("id") int id,@RequestParam("isUsed") Boolean isUsed){
+        System.out.println(id+","+isUsed);
+        adminService.banAdmin(id,isUsed);
     }
 }

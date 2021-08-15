@@ -17,4 +17,19 @@ public class LanguageService {
         return languageDao.getLanguage();
     }
 
+    public void deleteLanguage(int id){
+        languageDao.deleteLanguage(id);
+    }
+
+    public void updateLanguage(Language language){
+        languageDao.updateLanguage(language);
+    }
+
+    public void insertLanguage(String language){
+        languageDao.insertLanguage(language);
+    }
+
+    public int isUsed(int id){
+        return languageDao.isUsed(id);
+    }
 }
