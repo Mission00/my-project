@@ -65,4 +65,7 @@ public interface AdminDao {
     @Update("update admin set isUsed=${isUsed} where id=#{id}")
     void banAdmin(int id,boolean isUsed);
 
+    @Select("select * from admin where name=#{name}")
+    Admin getAdminByName(String name);
+
 }

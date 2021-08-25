@@ -31,9 +31,6 @@ public class MovieController {
         {
             list = movieService.selectAllMovie();
         }
-
-
-        System.out.println(list.get(0));
         return list;
     }
 

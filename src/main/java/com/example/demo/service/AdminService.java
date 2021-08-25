@@ -49,4 +49,8 @@ public class AdminService {
 
     public void banAdmin(int id,boolean isUsed){adminDao.banAdmin(id,isUsed);}
 
+    public Admin getAdminByName(String name){
+        return adminDao.getAdminByName(name);
+    }
+
 }
