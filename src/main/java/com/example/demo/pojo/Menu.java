@@ -1,20 +1,18 @@
 package com.example.demo.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import lombok.ToString;
+import org.springframework.data.annotation.Transient;
+
 import java.util.List;
 
-@Entity
-@Table(name = "menu")
-@JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+@ToString
 public class Menu {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+
     int id;
     String path;
     String name;
+
     String nameZh;
     String iconCls;
     String component;
@@ -93,4 +91,6 @@ public class Menu {
         this.children = children;
         return this;
     }
+
+
 }

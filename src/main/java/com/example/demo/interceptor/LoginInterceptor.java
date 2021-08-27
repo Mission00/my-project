@@ -24,6 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         Subject subject = SecurityUtils.getSubject();
         // 使用 shiro 验证
         if (!subject.isAuthenticated()) {
+            System.out.println("shiro验证失败");
             return false;
         }
         return true;

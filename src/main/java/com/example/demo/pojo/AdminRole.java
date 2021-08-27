@@ -4,14 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "admin_role")
-@JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
 public class AdminRole {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     int id;
     int aid;
     int rid;

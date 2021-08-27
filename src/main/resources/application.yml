@@ -24,4 +24,4 @@ server:
 # spring-boot默认打印输出info级别以上的，可在此处修改输出级别
 logging:
         level:
-                root: INFO
+                root: info
