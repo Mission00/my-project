@@ -25,10 +25,20 @@ public class RoleService {
         return roleDao.findById(id);
     }
 
-    public List<Role> listRolesByUser(String adminName) {
+    public List<Role> listRolesByAdmin(String adminName) {
         int aid = adminService.getAdminByName(adminName).getId();
         List<Integer> rids = adminRoleService.listAllByAid(aid)
                 .stream().map(AdminRole::getRid).collect(Collectors.toList());
         return roleDao.findAllByRid(rids);
+    }
+
+    public List<Role> finAll(){
+        try{
+            List<Role> roles= roleDao.findAll();
+            return roles;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

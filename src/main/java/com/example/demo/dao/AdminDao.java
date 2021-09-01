@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.pojo.Admin;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface AdminDao {
             @Result(column = "name",property = "adminname"),
             @Result(column = "password",property = "password"),
             @Result(column = "remarks",property = "remarks"),
+            @Result(column = "id",property = "roles",
+                many = @Many(select = "com.example.demo.dao.RoleDao.getRoleByAid",fetchType = FetchType.DEFAULT))
     })
     Admin selectAdminByNameAndPassword(String adminname, String password);
 
@@ -26,6 +29,8 @@ public interface AdminDao {
             @Result(column = "name",property = "adminname"),
             @Result(column = "password",property = "password"),
             @Result(column = "remarks",property = "remarks"),
+            @Result(column = "id",property = "roles",
+                    many = @Many(select = "com.example.demo.dao.RoleDao.getRoleByAid",fetchType = FetchType.DEFAULT))
     })
     Admin selectAdminByName(String adminName);
 
@@ -41,6 +46,8 @@ public interface AdminDao {
             @Result(column = "name",property = "adminname"),
             @Result(column = "password",property = "password"),
             @Result(column = "remarks",property = "remarks"),
+            @Result(column = "id",property = "roles",
+                    many = @Many(select = "com.example.demo.dao.RoleDao.getRoleByAid",fetchType = FetchType.DEFAULT))
     })
     List<Admin> selectAdmin(int pageSize,int star,@Param("searchMsg")String searchMsg);
 
@@ -48,7 +55,8 @@ public interface AdminDao {
     @Select("delete from admin where id = #{id}")
     void deleteAdmin(int id);
 
-    @Insert("insert into admin (name,password,remarks,isUsed) values (#{adminname},#{password},#{remarks},#{isUsed})")
+    @Insert("insert into admin (name,password,remarks,isUsed) " +
+            "values (#{adminname},#{password},#{remarks},#{isUsed})")
     void insertAdmin(Admin admin);
 
     @Select("<script>"

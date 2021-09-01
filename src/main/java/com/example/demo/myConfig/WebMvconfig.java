@@ -1,4 +1,4 @@
-package com.example.demo.MyConfig;
+package com.example.demo.myConfig;
 
 import com.example.demo.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -20,15 +20,15 @@ public class WebMvconfig implements WebMvcConfigurer {
         registry.addResourceHandler("/img/**").addResourceLocations("file:G:/disign/data/");
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getLoginIntercepter())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/api/login")
-                .excludePathPatterns("/api/logout")
-                .excludePathPatterns("/api/admin/login")
-                .excludePathPatterns("/api/admin/logout");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(getLoginIntercepter())
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/api/login")
+//                .excludePathPatterns("/api/logout")
+//                .excludePathPatterns("/api/admin/login")
+//                .excludePathPatterns("/api/admin/logout");
+//    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

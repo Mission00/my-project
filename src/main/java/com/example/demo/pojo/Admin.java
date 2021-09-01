@@ -1,11 +1,27 @@
 package com.example.demo.pojo;
 
+import lombok.ToString;
+
+import java.util.List;
+
+@ToString
 public class Admin {
     private int id;
     private String adminname;
     private String password;
     private String remarks;
     private Boolean isUsed;
+    private List<Role> roles;
+
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public Admin setRoles(List<Role> roles) {
+        this.roles = roles;
+        return this;
+    }
 
     public Boolean getisUsed() {
         return isUsed;

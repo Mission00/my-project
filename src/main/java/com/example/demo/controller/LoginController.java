@@ -113,10 +113,10 @@ public class LoginController {
     }
 
     @ResponseBody
-    @GetMapping(value = "api/authentication")
+    @GetMapping(value = "api/admin/authentication")
     public String authentication(){
         String username = SecurityUtils.getSubject().getPrincipal().toString();
-        System.out.println(username);
+        System.out.println(username+"身份验证");
         return "身份认证成功";
     }
 }

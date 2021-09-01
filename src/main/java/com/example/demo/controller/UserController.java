@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private AdminService adminService;
 
-    @GetMapping(value = "/api/userlist")
+    @GetMapping(value = "/api/admin/userlist")
     @ResponseBody
     public Result listUser(@RequestParam("pageSize") int pageSize
             ,@RequestParam("currentPage") int currentPage
@@ -42,7 +42,7 @@ public class UserController {
         return result;
     }
 
-    @GetMapping(value = "/api/adminlist")
+    @GetMapping(value = "/api/admin/adminlist")
     @ResponseBody
     public Result<List<Admin>> listAdmin(@RequestParam("pageSize") int pageSize
             ,@RequestParam("currentPage") int currentPage
@@ -60,7 +60,7 @@ public class UserController {
         return result;
     }
 
-    @GetMapping(value = "/api/deleteAdmin")
+    @GetMapping(value = "/api/admin/deleteAdmin")
     @ResponseBody
     public Result deleteAdminById(@RequestParam("id") int id)
     {
@@ -68,7 +68,7 @@ public class UserController {
         return null;
     }
 
-    @GetMapping(value = "/api/deleteUser")
+    @GetMapping(value = "/api/admin/deleteUser")
     @ResponseBody
     public Result deleteUserById(@RequestParam("id") int id)
     {
@@ -76,7 +76,7 @@ public class UserController {
         return null;
     }
 
-    @PostMapping(value = "/api/insertAdmin")
+    @PostMapping(value = "/api/admin/insertAdmin")
     @ResponseBody
     public Result insertAdmin(@RequestBody Admin admin)
     {
@@ -88,7 +88,7 @@ public class UserController {
         return new Result(200);
     }
 
-    @PostMapping(value = "/api/insertUser")
+    @PostMapping(value = "/api/admin/insertUser")
     @ResponseBody
     public Result insertUser(@RequestBody User user)
     {
@@ -100,21 +100,21 @@ public class UserController {
         return new Result(200);
     }
 
-    @PostMapping(value = "/api/updateAdmin")
+    @PostMapping(value = "/api/admin/updateAdmin")
     @ResponseBody
     public void updataAdmin(@RequestBody Admin admin){
         System.out.println(admin);
         adminService.updateAdmin(admin);
     }
 
-    @PostMapping(value = "/api/updateUser")
+    @PostMapping(value = "/api/admin/updateUser")
     @ResponseBody
     public void updataAdmin(@RequestBody User user){
         System.out.println(user);
         userService.updateUser(user);
     }
 
-    @GetMapping(value = "/api/banAdmin")
+    @GetMapping(value = "/api/admin/banAdmin")
     @ResponseBody
     public void banAdmin(@RequestParam("id") int id,@RequestParam("isUsed") Boolean isUsed){
         System.out.println(id+","+isUsed);

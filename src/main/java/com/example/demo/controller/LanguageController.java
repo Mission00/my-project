@@ -15,14 +15,14 @@ public class LanguageController {
     @Autowired
     LanguageService languageService;
     @CrossOrigin
-    @GetMapping(value = "api/getlanguage")
+    @GetMapping(value = "api/admin/getlanguage")
     @ResponseBody
     public List<Language> getLanguage(){
         return languageService.getLanguage();
     }
 
     @CrossOrigin
-    @GetMapping(value = "api/deletelanguage")
+    @GetMapping(value = "api/admin/deletelanguage")
     @ResponseBody
     public Result deleteLanguage(@RequestParam("id") int id){
         Result result = new Result(200);
@@ -41,7 +41,7 @@ public class LanguageController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "api/insertlanguage")
+    @GetMapping(value = "api/admin/insertlanguage")
     @ResponseBody
     public void insertLanguage(@RequestParam("language") String language){
         try{
@@ -52,7 +52,7 @@ public class LanguageController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "api/updatelanguage")
+    @PostMapping(value = "api/admin/updatelanguage")
     @ResponseBody
     public void updateLanguage(@RequestBody Language language){
         try{

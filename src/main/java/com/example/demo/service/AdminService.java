@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.AdminDao;
+import com.example.demo.dao.AdminRoleDao;
 import com.example.demo.pojo.Admin;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import java.util.List;
 public class AdminService {
     @Autowired
     AdminDao adminDao;
+
+    @Autowired
+    AdminRoleService adminRoleService;
     public Admin selectAdminByAdminNameAndPassword(String adminname, String password)
     {
         Admin admin = null;
@@ -45,6 +49,7 @@ public class AdminService {
 
     public void updateAdmin(Admin admin){
         adminDao.updateAdmin(admin);
+        adminRoleService.saveRoleChange(admin.getId(),admin.getRoles());
     }
 
     public void banAdmin(int id,boolean isUsed){adminDao.banAdmin(id,isUsed);}

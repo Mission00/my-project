@@ -34,9 +34,34 @@ public class MovieController {
         return list;
     }
 
-    @GetMapping(value = "/api/movielist")
+    @GetMapping(value = "/api/admin/movielist")
     @ResponseBody
     public Result getMovieList(@RequestParam("pageSize") int pageSize
+            ,@RequestParam("currentPage") int currentPage
+            ,@RequestParam("searchMsg") String searchMsg
+            ,@RequestParam("searchType") String searchType
+            ,@RequestParam("language") int language_id
+            ,@RequestParam("category") int category_id)
+    {
+        searchType = searchMsg.equals("name")?null:searchType;
+        System.out.println(searchType);
+        List<Movie> movieList = movieService.selectMovie(pageSize,currentPage,searchMsg,
+                searchType,language_id,category_id);
+        Result result;
+        if(movieList == null){
+            result = new Result(400);
+        }else{
+            result = new Result(200);
+            result.setData(movieList);
+            result.setTotal(movieService.getTotal(searchMsg));
+        }
+        System.out.println(movieList);
+        return result;
+    }
+
+    @GetMapping(value = "/api/movielist")
+    @ResponseBody
+    public Result getMovieList2(@RequestParam("pageSize") int pageSize
             ,@RequestParam("currentPage") int currentPage
             ,@RequestParam("searchMsg") String searchMsg
             ,@RequestParam("searchType") String searchType
@@ -60,7 +85,7 @@ public class MovieController {
         return result;
     }
 
-    @PostMapping(value = "/api/insertmovie")
+    @PostMapping(value = "/api/admin/insertmovie")
     @ResponseBody
     public Result insertMovie(@RequestBody Movie movie)
     {
@@ -79,7 +104,7 @@ public class MovieController {
         return new Result(200);
     }
 
-    @PostMapping(value = "/api/updatemovie")
+    @PostMapping(value = "/api/admin/updatemovie")
     @ResponseBody
     public Result updateMovie(@RequestBody Movie movie)
     {
@@ -98,7 +123,7 @@ public class MovieController {
         return new Result(200);
     }
 
-    @GetMapping(value = "/api/deleteMovie")
+    @GetMapping(value = "/api/admin/deleteMovie")
     @ResponseBody
     public Result deleteMovie(@RequestParam("movie_id") int movie_id)
     {

@@ -13,7 +13,7 @@ import java.util.UUID;
 @Controller
 public class FileController {
     @CrossOrigin
-    @PostMapping("api/file/upload")
+    @PostMapping("api/admin/file/upload")
     @ResponseBody
     public String uploadImg(@RequestParam("file")MultipartFile multipartFile,HttpServletRequest request){
         System.out.println(multipartFile.getOriginalFilename());
@@ -40,7 +40,7 @@ public class FileController {
         return fileName;
     }
     @CrossOrigin
-    @GetMapping("api/file/remove")
+    @GetMapping("api/admin/file/remove")
     @ResponseBody
     public Boolean removeFile(String fileName){
         File file = new File("G:/disign/data/"+fileName);

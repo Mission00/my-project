@@ -16,7 +16,7 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
     @CrossOrigin
-    @GetMapping(value = "api/getcategory")
+    @GetMapping(value = "api/admin/getcategory")
     @ResponseBody
     public List<Category> getCategory(){
         return categoryService.getCategory();
@@ -24,7 +24,7 @@ public class CategoryController {
 
 
     @CrossOrigin
-    @GetMapping(value = "api/deletecategory")
+    @GetMapping(value = "api/admin/deletecategory")
     @ResponseBody
     public Result deleteCategory(@RequestParam("id") int id){
         Result result = new Result(200);

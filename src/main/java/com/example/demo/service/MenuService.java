@@ -50,6 +50,12 @@ public class MenuService {
         return menus;
     }
 
+    public List<Menu> getMenusByRid(int rid){
+        List<Menu> menus = menuDao.getMenusByRid(rid);
+        handleMenus(menus);
+        return menus;
+    }
+
     public void handleMenus(List<Menu> menus) {
         for (Menu menu : menus) {
             List<Menu> children = getAllByParentId(menu.getId());
@@ -63,5 +69,11 @@ public class MenuService {
                 iterator.remove();
             }
         }
+    }
+
+    public List<Menu> getAllMenu(){
+        List<Menu> menuList = menuDao.getAllMenu();
+        handleMenus(menuList);
+        return menuList;
     }
 }

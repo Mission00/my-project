@@ -3,9 +3,8 @@ package com.example.demo.dao;
 
 import com.example.demo.pojo.Role;
 import com.example.demo.pojo.RoleMenu;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Repository;
 
 import javax.websocket.server.ServerEndpoint;
@@ -19,13 +18,27 @@ public interface RoleDao {
     Role findById(int id);
 
     @Select("select * from role")
+    @Results({
+            @Result(id = true,column = "id",property = "id"),
+            @Result(column = "id", property = "perms",
+                    many = @Many(select = "com.example.demo.dao.PermissionDao.getPermissionByRid", fetchType = FetchType.DEFAULT)),
+    })
     List<Role> findAll();
 
     @Select("<script>" +
-            "select * from role where rid in("
+            "select * from role where id in("
             +"<foreach collection='rids' separator=',' item='id'>"
             + "#{id} "
             + "</foreach> "
             +")</script>")
     List<Role> findAllByRid(@Param("rids") List<Integer> rids);
+
+
+    @Select("select r.* from admin a " +
+            "left join admin_role ar " +
+            "on a.id = ar.aid " +
+            "join role r " +
+            "on ar.rid = r.id " +
+            "WHERE a.id = #{Aid}")
+    List<Role> getRoleByAid(int Aid);
 }
