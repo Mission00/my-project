@@ -41,4 +41,13 @@ public interface RoleDao {
             "on ar.rid = r.id " +
             "WHERE a.id = #{Aid}")
     List<Role> getRoleByAid(int Aid);
+
+    @Update("update role set name = #{name},name_zh = #{name_zh} " +
+            "where id = #{id}")
+    void updateRole(Role role);
+
+    @Insert("insert into role (name,name_zh) values (#{name},#{name_zh})")
+    void addRole(Role role);
+    @Delete("delete from role where id = #{id}")
+    void deleteRole(Role role);
 }

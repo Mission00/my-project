@@ -1,7 +1,5 @@
 package com.example.demo.dao;
 
-
-import com.example.demo.pojo.Role;
 import com.example.demo.pojo.RoleMenu;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,6 +24,14 @@ public interface RoleMenuDao {
             +")</script>")
     List<RoleMenu> findAllByRids(@Param("rids") List<Integer> rids);
 
-    @Delete("delete from role where rid = #{rid}")
+    @Delete("delete from role_menu where rid = #{rid}")
     void deleteAllByRid(int rid);
+
+    @Select("<script>" +
+            "insert into role_menu (rid,mid) values "
+            +"<foreach collection='rms' separator=',' item='rm'>"
+            + "(#{rm.rid},#{rm.mid} )"
+            + "</foreach> "
+            +"</script>")
+    void insertRoleMenuByRms(@Param("rms") List<RoleMenu> rms);
 }

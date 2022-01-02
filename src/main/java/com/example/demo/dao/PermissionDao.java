@@ -3,9 +3,7 @@ package com.example.demo.dao;
 
 import com.example.demo.pojo.Permission;
 import com.example.demo.pojo.Role;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +32,17 @@ public interface PermissionDao {
             "on rp.pid = p.id " +
             "WHERE r.id = #{Rid}")
     List<Permission> getPermissionByRid(int Rid);
+
+
+//    @Update("update permission set name = #{name},desc = #{desc},url = #{url}"+
+//            "where id = #{id}")
+    @Update("update permission set `desc`=#{desc},name=#{name},url=#{url}"+
+            "where id = #{id}")
+    void updatePermission(Permission permission);
+
+    @Insert("insert into permission (name,`desc`,url) values (#{name},#{desc},#{url})")
+    void addPermission(Permission permission);
+
+    @Delete("delete from permission where id=#{id}")
+    void deletePermission(Permission permission);
 }

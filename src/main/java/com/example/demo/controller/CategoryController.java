@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.pojo.Category;
-import com.example.demo.pojo.Language;
 import com.example.demo.result.Result;
 import com.example.demo.service.CategoryService;
-import com.example.demo.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

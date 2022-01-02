@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.RoleDao;
+import com.example.demo.dao.RolePermissionDao;
 import com.example.demo.pojo.AdminRole;
+import com.example.demo.pojo.Permission;
 import com.example.demo.pojo.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class RoleService {
     @Autowired
     private AdminRoleService adminRoleService;
 
+    @Autowired
+    private RolePermissionService rolePermissionService;
+
     public Role findById(int id) {
         return roleDao.findById(id);
     }
@@ -29,6 +34,8 @@ public class RoleService {
         int aid = adminService.getAdminByName(adminName).getId();
         List<Integer> rids = adminRoleService.listAllByAid(aid)
                 .stream().map(AdminRole::getRid).collect(Collectors.toList());
+        System.out.println("rid:");
+        System.out.println(rids);
         return roleDao.findAllByRid(rids);
     }
 
@@ -40,5 +47,18 @@ public class RoleService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void updateRole(Role role){
+        roleDao.updateRole(role);
+        rolePermissionService.saveRolePermission(role.getId(),role.getPerms());
+    }
+
+    public void addRole(Role role){
+        roleDao.addRole(role);
+    }
+
+    public void deleteRole(Role role){
+        roleDao.deleteRole(role);
     }
 }

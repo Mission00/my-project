@@ -1,10 +1,8 @@
 package com.example.demo.dao;
 
-import com.example.demo.pojo.Category;
 import com.example.demo.pojo.Language;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

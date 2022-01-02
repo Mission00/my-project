@@ -49,4 +49,16 @@ public class PermissionService {
     public List<Permission> getAllPerms(){
         return permissionDao.findAll();
     }
+
+    public void updatePermission(Permission permission){
+        permissionDao.updatePermission(permission);
+    }
+
+    public void addPermission(Permission permission){
+        permissionDao.addPermission(permission);
+    }
+
+    public void deletePermission(Permission permission) {
+        permissionDao.deletePermission(permission);
+    }
 }
