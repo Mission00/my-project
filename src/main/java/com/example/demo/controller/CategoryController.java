@@ -40,4 +40,26 @@ public class CategoryController {
         return result;
     }
 
+    @PostMapping(value = "api/admin/addCategory")
+    @ResponseBody
+    public void insertCategory(@RequestBody Category category){
+        System.out.println(1);
+        try{
+            categoryService.insertCategory(category.getCategory());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping(value = "api/admin/updateCategory")
+    @ResponseBody
+    public void updateCategory(@RequestBody Category category){
+        System.out.println(1);
+        try{
+            categoryService.updateCategory(category);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

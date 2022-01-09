@@ -19,7 +19,7 @@ public interface LanguageDao {
     @Delete("delete from language where id = #{id}")
     void deleteLanguage(int id);
 
-    @Insert("insert into language language= #{language}")
+    @Insert("insert into language (language)VALUES(#{language})")
     void insertLanguage(String language);
 
     @Update("update language set language = #{language} where id= #{id}")

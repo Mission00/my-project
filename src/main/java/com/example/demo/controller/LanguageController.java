@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.pojo.Language;
+import com.example.demo.pojo.Role;
 import com.example.demo.result.Result;
 import com.example.demo.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +41,22 @@ public class LanguageController {
         return result;
     }
 
-    @CrossOrigin
-    @GetMapping(value = "api/admin/insertlanguage")
+//    @PostMapping(value = "api/admin/insertlanguage")
+//    @ResponseBody
+//    public void insertLanguage(@RequestBody Language language){
+//        System.out.println(1);
+//        try{
+//            languageService.insertLanguage(language.getLanguage());
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
+
+    @PostMapping(value = "api/admin/addLanguage")
     @ResponseBody
-    public void insertLanguage(@RequestParam("language") String language){
-        try{
-            languageService.insertLanguage(language);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    public void addRole(@RequestBody Language language){
+        System.out.println(language);
+        languageService.insertLanguage(language.getLanguage());
     }
 
     @CrossOrigin

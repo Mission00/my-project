@@ -18,10 +18,15 @@ spring:
                         connection-timeout: 60000
         resources:
                 static-locations: file:G:/disign/data/  #访问系统外部资源，将该目录下的文件映射到系统下
-
 server:
         port: 8443
 # spring-boot默认打印输出info级别以上的，可在此处修改输出级别
 logging:
         level:
                 root: info
+                #动态刷新配置 ---需要忽略权限拦截
+management:
+        endpoints:
+                web:
+                        exposure:
+                                include: refresh

@@ -21,7 +21,7 @@ public interface CategoryDao {
     @Delete("delete from category where id = #{id}")
     void deleteCategory(int id);
 
-    @Insert("insert into category category= #{category}")
+    @Insert("insert into category (category) values (#{category})")
     void insertCategory(String category);
 
     @Update("update category set category = #{category} where id= #{id}")
