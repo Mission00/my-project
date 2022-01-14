@@ -28,7 +28,15 @@ public class MovieReviewController {
     @GetMapping(value = "/api/getMovieReviewList")
     @ResponseBody
     public List<MovieReview> getMovieReviewList(@RequestParam("movieID") int movieID){
-        System.out.println(">>>>>>>>>>>>>>"+movieID);
         return movieReviewService.getReviewList(movieID);
     }
+
+//    @PostMapping(value = "/api/replyMoviceReview")
+//    @ResponseBody
+//    public void replyMoviceReview(@RequestBody MovieReview movieReview){
+//
+//        movieReview.setTime(new Date());
+//        System.out.println(movieReview);
+////        movieReviewService.addMovieReviewService(movieReview);
+//    }
 }

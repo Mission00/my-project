@@ -21,7 +21,16 @@ public class MovieReview {
 
     @Transient
     private List<MovieReview> children;
+    private int likeCount;
 
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public MovieReview setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+        return this;
+    }
 
     public int getId() {
         return id;
@@ -130,10 +139,13 @@ public class MovieReview {
                 ", movieID=" + movieID +
                 ", fatherID=" + fatherID +
                 ", userIDF=" + userIDF +
+                ", userNameT='" + userNameT + '\'' +
+                ", userNameF='" + userNameF + '\'' +
                 ", userIDT=" + userIDT +
                 ", review='" + review + '\'' +
                 ", state=" + state +
                 ", time=" + time +
+                ", children=" + children +
                 '}';
     }
 }

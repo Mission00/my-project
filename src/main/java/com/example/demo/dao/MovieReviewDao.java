@@ -16,7 +16,7 @@ public interface MovieReviewDao {
 
 
     @Insert("insert into movie_review (movieID,fatherID,userIDF,userIDT,review,time,state,userNameF,userNameT) " +
-            "values(#{movieID},#{fatherID},#{userIDF},#{userIDT},#{review},#{time},#{state},#{userNameF},#{userNameT})")
+            "values(#{movieID},#{fatherID},#{userIDF},#{userIDT},#{review},#{time},#{state},#{userNameF},#{userNameT    })")
     void addMovieReviewDao(MovieReview movieReview);
 
 

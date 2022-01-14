@@ -39,6 +39,35 @@ public class FileController {
         //return file.getAbsolutePath().replaceAll("\\\\", "/");
         return fileName;
     }
+
+
+    @CrossOrigin
+    @PostMapping("api/file/upload")
+    @ResponseBody
+    public String uploadImg2(@RequestParam("file")MultipartFile multipartFile,HttpServletRequest request){
+        System.out.println(multipartFile.getOriginalFilename());
+        String originalFileName = multipartFile.getOriginalFilename();
+        String fileName = UUID.randomUUID().toString().replaceAll("-", "")
+                +originalFileName.substring(originalFileName.lastIndexOf("."));//uuid随机生成文件名
+        String filePath = "G:/disign/data/" + fileName;
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        // 文件存储
+        try {
+            multipartFile.transferTo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(fileName);
+        //return file.getAbsolutePath().replaceAll("\\\\", "/");
+        return fileName;
+    }
     @CrossOrigin
     @GetMapping("api/admin/file/remove")
     @ResponseBody
