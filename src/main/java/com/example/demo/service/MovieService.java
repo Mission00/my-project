@@ -3,7 +3,9 @@ package com.example.demo.service;
 import com.example.demo.dao.MovieDao;
 import com.example.demo.pojo.Movie;
 import com.example.demo.pojo.User;
+import com.example.demo.util.RedisKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,9 @@ import java.util.List;
 public class MovieService {
     @Autowired
     private MovieDao movieDao;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     public List<Movie> selectMovieByCategory (String Category)
     {
@@ -27,6 +32,7 @@ public class MovieService {
 
     public Movie selectMovieByID (int movieid)
     {
+        redisTemplate.opsForZSet().incrementScore(RedisKeyUtil.MOVIE_HOT,movieid,1);
         return movieDao.selectMovieById(movieid);
     }
 

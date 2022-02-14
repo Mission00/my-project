@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.Article;
 import com.example.demo.service.ArticleService;
+import com.example.demo.util.RedisKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,8 @@ public class ArticleController {
 
     @Autowired
     ArticleService articleService;
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @PostMapping(value = "api/savearticle")
     @ResponseBody
@@ -36,6 +40,7 @@ public class ArticleController {
     @GetMapping(value = "api/getArticle")
     @ResponseBody
     public Article getArticle(@RequestParam("id") int id){
+        redisTemplate.opsForZSet().incrementScore(RedisKeyUtil.ARTICLE_HOT,id,1);
         return articleService.getArticleById(id);
     }
 }
