@@ -35,12 +35,10 @@ public interface MovieDao {
     @Select("SELECT * FROM movie WHERE category=#{Category}")
     @Results({
             @Result(id = true,column = "movie_id",property = "movie_id"),
-            @Result(column = "name1",property = "name1"),
-            @Result(column = "name2",property = "name2"),
             @Result(column = "movie_id",property = "tagList",
                     many = @Many(select = "com.example.demo.dao.TagDao.getTagByMovieId",fetchType = FetchType.LAZY))
     })
-    List<Movie> selectMovieByCategory(String Category);
+    List<Movie> selectMovieByCategory(int Category);
 
     @Select("SELECT * FROM movie")
     @Results({
@@ -112,4 +110,7 @@ public interface MovieDao {
 
     @Delete("delete from movie where movie_id = #{movie_id}")
     void deleteMovie(int movie_id);
+
+    @Select("SELECT * FROM `movie` ORDER BY posttime LIMIT 0,8")
+    List<Movie> getNewMovies();
 }

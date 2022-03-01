@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.controller.IndexMovieController;
 import com.example.demo.controller.RoleController;
 import com.example.demo.dao.PermissionDao;
 import com.example.demo.pojo.Role;
@@ -19,12 +20,11 @@ class DemoApplicationTests {
     private RoleController roleController;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private IndexMovieController indexMovieController;
     @Test
     void contextLoads() {
-        ValueOperations<String, String> opsForValue = this.stringRedisTemplate.opsForValue();
-        opsForValue.set("name", "lisi"); // 缓存数据
-        String value = opsForValue.get("name"); // 获取缓存数据
-        System.out.println(value);
+        indexMovieController.getHotMovies();
     }
 
 

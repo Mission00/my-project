@@ -5,6 +5,7 @@ import com.example.demo.pojo.User;
 import com.example.demo.result.Result;
 import com.example.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +19,15 @@ import java.util.List;
 public class MovieController {
     @Autowired
     MovieService movieService;
+
+    @Autowired
+    RedisTemplate redisTemplate;
     @GetMapping(value = "/api/movies")
     @ResponseBody
-    public List<Movie> listMovies(@RequestParam("Category")String Category)
+    public List<Movie> listMovies(@RequestParam("Category")int Category)
     {
         List<Movie> list = null;
-        if(!Category.equals("全部"))
+        if(Category!=0)
         {
             list = movieService.selectMovieByCategory(Category);
         }
@@ -33,6 +37,19 @@ public class MovieController {
         }
         return list;
     }
+//    public List<Movie> listMovies(@RequestParam("Category")String Category)
+//    {
+//        List<Movie> list = null;
+//        if(!Category.equals("全部"))
+//        {
+//            list = movieService.selectMovieByCategory(Category);
+//        }
+//        else
+//        {
+//            list = movieService.selectAllMovie();
+//        }
+//        return list;
+//    }
 
     @GetMapping(value = "/api/admin/movielist")
     @ResponseBody

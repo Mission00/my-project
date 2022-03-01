@@ -18,10 +18,17 @@ public class MovieService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    public List<Movie> selectMovieByCategory (String Category)
+    public List<Movie> selectMovieByCategory (int Category)
     {
         List<Movie> list=null;
         list = movieDao.selectMovieByCategory(Category);
+        return list;
+    }
+
+    public List<Movie> getNewMovies ()
+    {
+        List<Movie> list=null;
+        list = movieDao.getNewMovies();
         return list;
     }
 
@@ -33,6 +40,11 @@ public class MovieService {
     public Movie selectMovieByID (int movieid)
     {
         redisTemplate.opsForZSet().incrementScore(RedisKeyUtil.MOVIE_HOT,movieid,1);
+        return movieDao.selectMovieById(movieid);
+    }
+    public Movie getMovieByID (int movieid)
+    {
+        //redisTemplate.opsForZSet().incrementScore(RedisKeyUtil.MOVIE_HOT,movieid,1);
         return movieDao.selectMovieById(movieid);
     }
 
