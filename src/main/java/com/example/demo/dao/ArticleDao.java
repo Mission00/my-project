@@ -13,7 +13,7 @@ public interface ArticleDao {
             "(article_title,article_content_html,article_content_md," +
             "article_abstract,article_cover,article_date,state,authorName,authorID,movieID,type)" +
             "values(#{articleTitle},#{articleContentHtml},#{articleContentMd}," +
-            "#{articleAbstract},#{articleCover},#{articleDate},#{state},#{authorName},#{authorID},#{movieID},0)")
+            "#{articleAbstract},#{articleCover},#{articleDate},#{state},#{authorName},#{authorID},#{movieID},#{type})")
     void saveArticle(Article article);
 
     @Select("select * from article where state>0")
@@ -27,6 +27,19 @@ public interface ArticleDao {
             @Result(property = "articleDate",column = "article_date")
     })
     List<Article> getArticleList();
+
+
+    @Select("select * from article where state=#{state} and type=#{type}")
+    @Results({
+            @Result(property = "id",column = "id"),
+            @Result(property = "articleTitle",column = "article_title"),
+            @Result(property = "articleContentMd",column = "article_content_md"),
+            @Result(property = "articleContentHtml",column = "article_content_html"),
+            @Result(property = "articleAbstract",column = "article_abstract"),
+            @Result(property = "articleCover",column = "article_cover"),
+            @Result(property = "articleDate",column = "article_date")
+    })
+    List<Article> getArticleByTypeAndState(int type,int state);
 
 
     @Select("select * from article where id=#{id}")

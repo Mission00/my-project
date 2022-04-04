@@ -21,6 +21,10 @@ public class ArticleService {
         return articleDao.getArticleList();
     }
 
+    public List<Article> getArticleByTypeAndState(int type,int state){
+        return articleDao.getArticleByTypeAndState(type,state);
+    }
+
     public Article getArticleById(int id){
         return articleDao.getArticleById(id);
     }

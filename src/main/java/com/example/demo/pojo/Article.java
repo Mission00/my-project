@@ -1,9 +1,16 @@
 package com.example.demo.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
 
+
+@Getter
+@Setter
+@ToString
 public class Article {
     private int id;
     private String articleTitle;
@@ -17,6 +24,9 @@ public class Article {
     private String authorName;
     private int authorID;
     private int movieID;
+    private int type;
+
+
 
     public int getMovieID() {
         return movieID;

@@ -31,7 +31,6 @@ public class MenuController {
     @GetMapping(value = "/api/admin/role/getAllMenu")
     @ResponseBody
     public List<Menu> menus(@RequestParam("rid") int rid){
-
         List<Menu> menulist = menuService.getMenusByRid(rid);
         System.out.println(menulist);
         return menulist;

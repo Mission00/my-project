@@ -73,6 +73,7 @@ public class MenuService {
 
     public List<Menu> getAllMenu(){
         List<Menu> menuList = menuDao.getAllMenu();
+        System.out.println(menuList);
         handleMenus(menuList);
         return menuList;
     }

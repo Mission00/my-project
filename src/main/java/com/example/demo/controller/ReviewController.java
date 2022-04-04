@@ -35,6 +35,32 @@ public class ReviewController {
         reviewService.addReview(movieReview);
     }
 
+    @GetMapping(value = "/api/admin/getAllReview")
+    @ResponseBody
+    public List<Review> getAllReviewList(int currentPage,int type){//
+        System.out.println(type);
+        return reviewService.getAllReview(currentPage,type);
+    }
+
+    @GetMapping(value = "/api/admin/deleteReview")
+    @ResponseBody
+    public void deleteReview(int id){//
+        reviewService.deleteReviewById(id);
+    }
+
+    @GetMapping(value = "/api/admin/passReview")
+    @ResponseBody
+    public void passReview(int id){//
+        System.out.println(id);
+        reviewService.passReviewById(id);
+    }
+
+    @PostMapping(value = "/api/deleteReview")
+    @ResponseBody
+    public void deleteReview(@RequestBody Review movieReview){//
+        System.out.println(movieReview);
+    }
+
     //type代表Review的type 0：影片评论 1：文章评论
     @GetMapping(value = "/api/getReviewList")
     @ResponseBody

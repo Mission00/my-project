@@ -25,6 +25,19 @@ public class ReviewService {
     }
 
 
+    public List<Review> getAllReview(int currentPage,int type){
+        int star = (currentPage-1)*10;
+        return reviewDao.getAllReview(star,type);
+    }
+
+    public void passReviewById(int id){
+        reviewDao.passReviewById(id);
+    }
+
+    public void deleteReviewById(int id){
+        reviewDao.deleteReviewBYId(id);
+    }
+
     @Transactional
     public List<Review> getReviewListByID(int id, int type){
         List<Review> list = reviewDao.getReviewListByIdAndType(id,type);

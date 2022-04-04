@@ -29,11 +29,25 @@ public class ArticleController {
         articleService.saveArticle(article);
     }
 
+    @PostMapping(value = "api/admin/savearticle")
+    @ResponseBody
+    public void saveArticle1(@RequestBody Article  article){
+        article.setArticleDate(new Date());
+        articleService.saveArticle(article);
+    }
+
 
     @PostMapping(value = "api/articleList")
     @ResponseBody
     public List<Article> getArticleList(){
         return articleService.getArticleList();
+    }
+
+    @GetMapping(value = "api/admin/articleList")
+    @ResponseBody
+    public List<Article> getArticleListByTypeAndState(@RequestParam("type") int type,@RequestParam("state") int state){
+        System.out.println(type  + " " + state);
+        return articleService.getArticleByTypeAndState(type,state);
     }
 
     @CrossOrigin
