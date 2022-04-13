@@ -37,17 +37,32 @@ public class ArticleController {
     }
 
 
-    @PostMapping(value = "api/articleList")
+    @GetMapping(value = "api/articleList")
     @ResponseBody
-    public List<Article> getArticleList(){
-        return articleService.getArticleList();
+    public List<Article> getArticleList(@RequestParam int type){
+        return articleService.getArticleList(type);
     }
 
     @GetMapping(value = "api/admin/articleList")
     @ResponseBody
-    public List<Article> getArticleListByTypeAndState(@RequestParam("type") int type,@RequestParam("state") int state){
-        System.out.println(type  + " " + state);
-        return articleService.getArticleByTypeAndState(type,state);
+    public List<Article> getArticleListByTypeAndState(@RequestParam("type") int type,@RequestParam("state") int state,
+                                                      @RequestParam("currentPage") int currentPage){
+        System.out.println(currentPage);
+        int star = (currentPage-1)*10;
+        System.out.println(star);
+        return articleService.getArticleByTypeAndState(type,state,star);
+    }
+
+    @GetMapping(value = "api/admin/passarticle")
+    @ResponseBody
+    public void passArticleById(int id){
+        articleService.passArticleById(id);
+    }
+
+    @GetMapping(value = "api/admin/deletearticle")
+    @ResponseBody
+    public void deleteArticleById(int id){
+        articleService.deleteArticleById(id);
     }
 
     @CrossOrigin

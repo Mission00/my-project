@@ -16,7 +16,7 @@ public interface ArticleDao {
             "#{articleAbstract},#{articleCover},#{articleDate},#{state},#{authorName},#{authorID},#{movieID},#{type})")
     void saveArticle(Article article);
 
-    @Select("select * from article where state>0")
+    @Select("select * from article where state=1 and type=#{type}")
     @Results({
             @Result(property = "id",column = "id"),
             @Result(property = "articleTitle",column = "article_title"),
@@ -26,10 +26,10 @@ public interface ArticleDao {
             @Result(property = "articleCover",column = "article_cover"),
             @Result(property = "articleDate",column = "article_date")
     })
-    List<Article> getArticleList();
+    List<Article> getArticleList(int type);
 
 
-    @Select("select * from article where state=#{state} and type=#{type}")
+    @Select("select * from article where state=#{state} and type=#{type} limit #{star},10")
     @Results({
             @Result(property = "id",column = "id"),
             @Result(property = "articleTitle",column = "article_title"),
@@ -39,7 +39,14 @@ public interface ArticleDao {
             @Result(property = "articleCover",column = "article_cover"),
             @Result(property = "articleDate",column = "article_date")
     })
-    List<Article> getArticleByTypeAndState(int type,int state);
+    List<Article> getArticleByTypeAndState(int type,int state,int star);
+
+
+    @Delete("delete from article where id = #{id}")
+    void deleteArticleByID(int id);
+
+    @Update("update article set state=1 where id = #{id}")
+    void passArticleByID(int id);
 
 
     @Select("select * from article where id=#{id}")

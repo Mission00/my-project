@@ -24,16 +24,17 @@ public class MovieController {
     RedisTemplate redisTemplate;
     @GetMapping(value = "/api/movies")
     @ResponseBody
-    public List<Movie> listMovies(@RequestParam("Category")int Category)
+    public List<Movie> listMovies(@RequestParam("Category")int Category,@RequestParam("currentPage") int currentPage)
     {
         List<Movie> list = null;
+        int star = (currentPage-1)*18;
         if(Category!=0)
         {
-            list = movieService.selectMovieByCategory(Category);
+            list = movieService.selectMovieByCategory(Category,star);
         }
         else
         {
-            list = movieService.selectAllMovie();
+            list = movieService.selectAllMovie(star);
         }
         return list;
     }

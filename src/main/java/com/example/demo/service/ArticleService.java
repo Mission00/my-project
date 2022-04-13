@@ -17,12 +17,20 @@ public class ArticleService {
         articleDao.saveArticle(article);
     }
 
-    public List<Article> getArticleList(){
-        return articleDao.getArticleList();
+    public List<Article> getArticleList(int type){
+        return articleDao.getArticleList(type);
     }
 
-    public List<Article> getArticleByTypeAndState(int type,int state){
-        return articleDao.getArticleByTypeAndState(type,state);
+    public List<Article> getArticleByTypeAndState(int type,int state,int star){
+        return articleDao.getArticleByTypeAndState(type,state,star);
+    }
+
+    public void deleteArticleById(int id){
+        articleDao.deleteArticleByID(id);
+    }
+
+    public void passArticleById(int id){
+        articleDao.passArticleByID(id);
     }
 
     public Article getArticleById(int id){

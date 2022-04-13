@@ -18,10 +18,10 @@ public class MovieService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    public List<Movie> selectMovieByCategory (int Category)
+    public List<Movie> selectMovieByCategory (int Category,int star)
     {
         List<Movie> list=null;
-        list = movieDao.selectMovieByCategory(Category);
+        list = movieDao.selectMovieByCategory(Category,star);
         return list;
     }
 
@@ -32,9 +32,9 @@ public class MovieService {
         return list;
     }
 
-    public List<Movie> selectAllMovie ()
+    public List<Movie> selectAllMovie (int star)
     {
-        return movieDao.selectAllMovie();
+        return movieDao.selectAllMovie(star);
     }
 
     public Movie selectMovieByID (int movieid)

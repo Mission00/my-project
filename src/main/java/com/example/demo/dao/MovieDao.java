@@ -32,21 +32,21 @@ public interface MovieDao {
     })
     Movie selectMovieById(int movieid);
 
-    @Select("SELECT * FROM movie WHERE category=#{Category}")
+    @Select("SELECT * FROM movie WHERE category=#{Category} limit #{star},18")
     @Results({
             @Result(id = true,column = "movie_id",property = "movie_id"),
             @Result(column = "movie_id",property = "tagList",
                     many = @Many(select = "com.example.demo.dao.TagDao.getTagByMovieId",fetchType = FetchType.LAZY))
     })
-    List<Movie> selectMovieByCategory(int Category);
+    List<Movie> selectMovieByCategory(int Category,int star);
 
-    @Select("SELECT * FROM movie")
+    @Select("SELECT * FROM movie limit #{star},18")
     @Results({
             @Result(id = true,column = "movie_id",property = "movie_id"),
             @Result(column = "movie_id",property = "tagList",
                     many = @Many(select = "com.example.demo.dao.TagDao.getTagByMovieId",fetchType = FetchType.LAZY))
     })
-    List<Movie> selectAllMovie();
+    List<Movie> selectAllMovie(int star);
 
     @Select("select * from movie WHERE name1 LIKE concat('%',#{searchMsg},'%') or name2 LIKE concat('%',#{searchMsg},'%')")
     List<Movie> searchMovieBySearchMsg(String SearchMsg);
