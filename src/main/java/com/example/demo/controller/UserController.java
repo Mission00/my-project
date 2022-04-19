@@ -120,4 +120,17 @@ public class UserController {
         System.out.println(id+","+isUsed);
         adminService.banAdmin(id,isUsed);
     }
+
+    @GetMapping(value = "/api/getUserByID")
+    @ResponseBody
+    public User getUserByID(@RequestParam("id") int id){
+        return userService.getUserByID(id);
+    }
+
+    @PostMapping(value = "/api/updateUser")
+    @ResponseBody
+    public void updataAdmin2(@RequestBody User user){
+        System.out.println(user);
+        userService.updateUser(user);
+    }
 }

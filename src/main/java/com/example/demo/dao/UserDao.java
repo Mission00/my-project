@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.pojo.Admin;
 import com.example.demo.pojo.User;
+import lombok.Setter;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -61,6 +62,10 @@ public interface UserDao {
     @Delete("delete from user where id = #{id}")
     void deleteUser(int id);
 
-    @Update("update user set name = #{username},password=#{password} where id=#{id}")
+    @Update("update user set name = #{username},password=#{password},head=#{head} where id=#{id}")
     void updateUser(User user);
+
+    @Select("select * from user where id = #{id}")
+    @Results(@Result(column = "name",property = "username"))
+    User getUserByID(int id);
 }

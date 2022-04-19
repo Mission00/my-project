@@ -45,12 +45,16 @@ public interface ArticleDao {
     @Delete("delete from article where id = #{id}")
     void deleteArticleByID(int id);
 
+    @Select("select * from article where authorID = #{id} limit #{star},8")
+    @ResultMap("articleMap")
+    List<Article> getArticleByAuthorID(int id,int star);
+
     @Update("update article set state=1 where id = #{id}")
     void passArticleByID(int id);
 
 
     @Select("select * from article where id=#{id}")
-    @Results({
+    @Results(id="articleMap",value={
             @Result(property = "id",column = "id"),
             @Result(property = "articleTitle",column = "article_title"),
             @Result(property = "articleContentMd",column = "article_content_md"),

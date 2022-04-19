@@ -43,6 +43,12 @@ public class ArticleController {
         return articleService.getArticleList(type);
     }
 
+    @GetMapping(value = "api/articleListByAuthorId")
+    @ResponseBody
+    public List<Article> getArticleListByUserId(@RequestParam int id,@RequestParam int page){
+        return articleService.getArticleByAuthorId(id,page);
+    }
+
     @GetMapping(value = "api/admin/articleList")
     @ResponseBody
     public List<Article> getArticleListByTypeAndState(@RequestParam("type") int type,@RequestParam("state") int state,
@@ -62,6 +68,13 @@ public class ArticleController {
     @GetMapping(value = "api/admin/deletearticle")
     @ResponseBody
     public void deleteArticleById(int id){
+        articleService.deleteArticleById(id);
+    }
+
+    @GetMapping(value = "api/deletearticle")
+    @ResponseBody
+    public void deleteArticleById2(int id){
+        System.out.println(id);
         articleService.deleteArticleById(id);
     }
 

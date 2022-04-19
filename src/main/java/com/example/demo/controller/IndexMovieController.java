@@ -67,7 +67,6 @@ public class IndexMovieController
     @ResponseBody
     public List<Movie> getNewMovies()
     {
-
         return movieService.getNewMovies();
     }
 }

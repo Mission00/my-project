@@ -55,5 +55,8 @@ public class UserService {
         userDAO.updateUser(user);
     }
 
+    public User getUserByID(int id){
+        return userDAO.getUserByID(id);
+    }
 
 }

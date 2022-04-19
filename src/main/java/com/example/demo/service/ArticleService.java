@@ -21,6 +21,11 @@ public class ArticleService {
         return articleDao.getArticleList(type);
     }
 
+    public List<Article> getArticleByAuthorId(int id,int page){
+        int star = (page-1)*8;
+        return articleDao.getArticleByAuthorID(id,star);
+    }
+
     public List<Article> getArticleByTypeAndState(int type,int state,int star){
         return articleDao.getArticleByTypeAndState(type,state,star);
     }

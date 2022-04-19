@@ -45,6 +45,7 @@ public class LoginController {
             //result.setCode(200);
             map.put("userid",user.getId());
             map.put("username",user.getUsername());
+            map.put("head",user.getHead());
             System.out.println(map.get("userid"));
             session.setAttribute("user",user);
             result.setData(map);
